@@ -14,13 +14,17 @@ describe("tests for change-handler", function() {
     });
 
     it("Returns true if enough coins have been inserted to at least meet the amountDue", function() {
-        // Remember, you can arrange, act, and assert...start small
-        //Arrange
+        //This should be false because cash tendered is 0
         let changeHandler = new ChangeHandler(20,0);
+        expect(changeHandler.isPaymentSufficient()).toBe(false);
+        
+        //This should be true because cash tendered is equal to cash due
+        changeHandler = new ChangeHandler(20,20);
+        expect(changeHandler.isPaymentSufficient()).toBe(true);
 
-        expect(changeHandler.isPaymentSufficient('3')).toBe(false);
-        expect(changeHandler.isPaymentSufficient('20')).toBe(true);
-        expect(changeHandler.isPaymentSufficient('100')).toBe(true);
+        //This should be true because cash tendered is more than cash due
+        changeHandler = new ChangeHandler(20,100);
+        expect(changeHandler.isPaymentSufficient()).toBe(true);
     });
 
     it("return the correct change", function() {

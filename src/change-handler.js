@@ -32,8 +32,8 @@ class ChangeHandler {
     /**
      * Returns true if enough coins have been inserted to at least meet the amountDue
      */
-    isPaymentSufficient(cash) {
-        if (cash >= this.amountDue) {
+    isPaymentSufficient() {
+        if (this.cashTendered >= this.amountDue) {
             return true;
         } else {
             return false;
